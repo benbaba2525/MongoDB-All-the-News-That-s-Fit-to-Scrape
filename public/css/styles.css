@@ -9,15 +9,26 @@
 .headDiv{
     background-size: cover;
     background-image: url("/img/newspaper.jpeg");
-    height: 350px;
+    height: 380px;
 }
 
-.nav-link{
+.link{
     color: white;
+    font-size: 15px;
+    padding: 5px;
 }
-a{
-    font-size: 20px;
+.link:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgba(51, 212, 59, 0.796);
+    
 }
+
+.nav-item{
+    padding: 15px;
+}
+
+
+
 .h1News{
 
     color: rgb(237, 245, 247);
@@ -26,3 +37,4 @@ a{
     text-align: center;
     padding-top: 100px;
 }
+

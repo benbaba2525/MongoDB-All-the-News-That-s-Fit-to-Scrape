@@ -67,6 +67,22 @@ app.get("/", function(req, res){
 
 })*/
 
+app.get("/saved", function(req, res){
+  /*db.Article.find({saved: false}, function(err, result){
+      // Show any errors
+  if (error) {
+      console.log(error);
+    }
+    else {*/
+      // Otherwise, send the response to the client (for axios success function)
+      res.render("saved");
+   // }
+ // })
+
+});
+
+
+
 // Start the server
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
