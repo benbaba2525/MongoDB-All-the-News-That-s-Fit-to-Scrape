@@ -10,7 +10,7 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
-//var db = require("./models")
+var db = require("./models")
 
 var PORT = process.env.PORT || 3000;
 
@@ -38,46 +38,46 @@ app.engine(
 
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-//var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeDb";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeDb";
 // Connect to Mongo  DB
-//mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-//var results = [];
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+var results = [];
 
 // Start Routes
 
 app.get("/", function(req, res){
-    /*db.Article.find({saved: false}, function(err, result){
+  db.Article.find({saved: false}, function(err, result){
         // Show any errors
     if (error) {
         console.log(error);
       }
-      else {*/
+      else {
         // Otherwise, send the response to the client (for axios success function)
         res.render("index");
-     // }
-   // })
+      }
+   })
 
 });
 // Scrape data from one site and place it into the mongodb db
-/*app.get("/scrape", function(req, res){
+app.get("/scrape", function(req, res){
     // Make a request via axios for the news section of foxnews
  axios.get("https://www.foxnews.com/").then(function(respnse){
      var $ = cheerio.load(response.data);
  })
 
-})*/
+})
 
 app.get("/saved", function(req, res){
-  /*db.Article.find({saved: false}, function(err, result){
+  db.Article.find({saved: false}, function(err, result){
       // Show any errors
   if (error) {
       console.log(error);
     }
-    else {*/
+    else {
       // Otherwise, send the response to the client (for axios success function)
       res.render("saved");
-   // }
- // })
+   }
+ })
 
 });
 
