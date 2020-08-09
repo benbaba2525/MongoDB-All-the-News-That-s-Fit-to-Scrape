@@ -37,21 +37,49 @@
 
 <!-- Articles List -->
 <div class="container mt-5">
-<div class="card mb-3" id="articleCard">
+  {{#each saved}}
+<div class="card mb-3" id="article">
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="/img/newspaper.jpeg" class="card-img" alt="...">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8" id="saved">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h2 class="card-title" id="title">{{title}}</h2>
+        <p class="card-text" id="summary">{{summary}}</p>
        <hr>
-       <a href="#" class="btn btn-primary">Go somewhere</a>
+       <div class="col-md-6">
+          <a href={{link}} class="link">FULL STORY</a>
+        </div>
+
+        <form action="/unsave" method="POST" id="delete-article">
+          <input type="hidden" name="id" value={{_id}}>
+          <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
+        </form>
+
+        <div class="col-md-6" id="newNoteDiv">
+            <form action="/newnote" method="POST" id="new-note">
+                <input type="hidden" name="id" value={{_id}}>
+                <input type="name" class="form-control" id="message" placeholder="Record a note...">
+                <button class="btn btn-lg" id="noteBtn" type="submit">SUBMIT</button>
+            </form>
+
+            <!-- Note -->
+            <div id="noteDiv">
+                <h2 class="savedHeader">Saved Notes</h2>
+                <hr>
+                <ul>
+                {{#each note}}
+                <li>{{this}}</li>
+                {{/each}}
+                </ul>
+            </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+{{/each}}
 </div>
 
 
