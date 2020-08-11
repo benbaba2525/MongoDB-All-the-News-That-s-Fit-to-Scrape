@@ -1,3 +1,38 @@
+<!-- Articles List -->
+<div class="container mt-5">
+  {{#each result}}
+  {{#unless saved}}
+<div class="card mb-3" class="article">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <!-- Image go here -->
+      <img src="/public/img/newspaper.jpeg" class="card-img">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title" id="title">{{title}}</h2>
+        <p class="card-text" id="summary">{{summary}}</p>
+       <hr>
+       <div class="col-md-6">
+          <a href={{link}} class="link">FULL STORY</a>
+        </div>
+        <form action="/update" method="POST" id="save-article">
+          <input type="hidden" name="id" value={{_id}}>
+          <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{/unless}}
+{{/each}}
+
+</div>
+
+
+
+
+
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
