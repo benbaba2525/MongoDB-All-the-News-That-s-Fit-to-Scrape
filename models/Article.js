@@ -12,14 +12,14 @@ var ArticleSchema = new Schema ({
         type: String,
         required: true
     },
+    summaryTwo: {
+        type: String,
+        required: false
+    },
     link: {
         type: String,
         required: true
     },
-    img: {
-		type: String,
-		// default: "/assets/images/unavailable.jpg"
-	},
     saved: {
         type: Boolean,
         default: false
