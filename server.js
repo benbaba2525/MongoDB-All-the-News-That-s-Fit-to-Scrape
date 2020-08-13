@@ -22,7 +22,7 @@ app.set('index', __dirname + '/views');
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-
+var results = [];
 
 // Start routes here...
 app.get("/", function (req, res) {
@@ -35,7 +35,7 @@ app.get("/", function (req, res) {
 app.get("/newscrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
         var $ = cheerio.load(response.data)
-        var results = [];
+   
         $("h2 span").each(function (i, element) {
             var headline = $(element).text();
             var link = "https://www.nytimes.com";
