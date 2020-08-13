@@ -14,13 +14,12 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-// Set Handlebars.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
+app.set('index', __dirname + '/views');
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoSrapeDB";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
@@ -30,7 +29,6 @@ app.get("/", function (req, res) {
     db.Article.find({ saved: false }, function (err, result) {
         if (err) throw err;
         res.render("index", { result })
-  
     })
 
 });
@@ -43,17 +41,16 @@ app.get("/newscrape", function (req, res) {
             var link = "https://www.nytimes.com";
             link = link + $(element).parents("a").attr("href");
             var summaryOne = $(element).parent().parent().siblings().children("li:first-child").text();
-            //var summaryTwo = $(element).parent().parent().siblings().children("li:last-child").text();
-            var img = $(element).parent().find("img").attr("src");
+            var summaryTwo = $(element).parent().parent().siblings().children("li:last-child").text();
+
             if (headline && summaryOne && link) {
                 results.push({
                     headline: headline,
                     summaryOne: summaryOne,
-                    link: link,
-                    img : img
+                    summaryTwo: summaryTwo,
+                    link: link
                 })
             }
-        
         });
         db.Article.create(results)
             .then(function (dbArticle) {
@@ -63,9 +60,11 @@ app.get("/newscrape", function (req, res) {
             .catch(function (err) {
                 console.log(err);
             })
+        app.get("/", function (req, res) {
+            res.render("index")
+        })
     })
 });
-
 
 app.put("/update/:id", function (req, res) {
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -103,8 +102,6 @@ app.put("/newnote/:id", function(req, res) {
         } 
     })
 })
-
-
 
 app.get("/saved", function (req, res) {
     var savedArticles = [];
