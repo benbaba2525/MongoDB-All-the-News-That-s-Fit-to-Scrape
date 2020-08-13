@@ -1,3 +1,4 @@
+
 <head>
   <title>News Scraper</title>
   <meta charset="utf-8">
@@ -22,8 +23,7 @@
         <a class="link" href="/saved">SAVED ARTICLES </a>
       </li>
       <li class="nav-item">
-           <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
-        <a class="link" href="/" id="scrapeBtn">SCRAPE NEWS ARTICLES</a>
+        <a class="link" href="/scrape" id="scraper">SCRAPE NEWS ARTICLES</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0 ml-5">
@@ -41,67 +41,21 @@
 </div>
 </div>
 
-<hr>
-    
-<!-- Articles List -->
-<div class="container mt-5">
-  {{#each result}}
-  {{#unless saved}}
-<div class="card mb-3" class="article">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <!-- Image go here -->
-      <img src="/public/img/newspaper.jpeg" class="card-img">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title" id="headline">{{headline}}</h2>
-       <ul>
-                    <li class="summary">{{summaryOne}}</li>
-                    <li class="summary">{{summaryTwo}}</li>
-        </ul>
-       <hr>
-       <div class="col-md-6">
-          <a href={{link}} class="link" style="color: black;">FULL STORY</a>
-        </div>
-        <form action="/update" method="POST" id="save-article">
-          <input type="hidden" name="id" value={{_id}}>
-          <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-{{/unless}}
-{{/each}}
 
-</div>
+
+
+<div id="wrapper">
+      <h1>Note Scraper</h1>
+      <h2><i>If you can do this...the homework should be no problem.</i></h2>
+
+      <div id="articles"></div>
+      <div id="notes"></div>
+
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+
+
 </body>
 
-<script>
-    $(document).ready(function () {
-
-        $("#scrapeBtn").on("click", function (event) {
-            event.preventDefault();
-            $.get("/newscrape", function (data) {
-                location.reload();
-                
-            });
-        });
-
-        $("#save-article").on("click", function (event) {
-            event.preventDefault();
-            console.log("save it!");
-            var id = $(this).children().val();
-            console.log(id);
-            var data = {
-                _id: id
-            }
-            $.ajax("/update/" + id, {
-                type: "PUT",
-                data: data
-            })
-            location.reload();
-        });
-    });
-</script>
