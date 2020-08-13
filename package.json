@@ -4,7 +4,7 @@
   "description": "All the news that's fit to scrape",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +23,8 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.0.0",
     "mongoose": "^5.4.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
