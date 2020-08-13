@@ -19,7 +19,7 @@ app.set("view engine", "handlebars");
 app.set('index', __dirname + '/views');
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoSrapeDB";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
@@ -35,7 +35,6 @@ app.get("/", function (req, res) {
 app.get("/newscrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
         var $ = cheerio.load(response.data)
-   
         $("h2 span").each(function (i, element) {
             var headline = $(element).text();
             var link = "https://www.nytimes.com";
@@ -102,6 +101,8 @@ app.put("/newnote/:id", function(req, res) {
         } 
     })
 })
+
+
 
 app.get("/saved", function (req, res) {
     var savedArticles = [];

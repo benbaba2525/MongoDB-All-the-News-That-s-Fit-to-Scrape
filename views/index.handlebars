@@ -22,6 +22,7 @@
         <a class="link" href="/saved">SAVED ARTICLES </a>
       </li>
       <li class="nav-item">
+           <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
         <a class="link" href="/" id="scrapeBtn">SCRAPE NEWS ARTICLES</a>
       </li>
     </ul>
@@ -32,7 +33,6 @@
   </div>
 </nav>
 </div>
-
 
 <!-- Newspaper picture -->
 <div class="headDiv">
@@ -51,14 +51,14 @@
   <div class="row no-gutters">
     <div class="col-md-4">
       <!-- Image go here -->
-      <img class="media" src="{{img}}">
+      <img src="/public/img/newspaper.jpeg" class="card-img">
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h2 class="card-title" id="headline">{{headline}}</h2>
        <ul>
                     <li class="summary">{{summaryOne}}</li>
-                    <li class="summary">{{summaryTwo}}</li> 
+                    <li class="summary">{{summaryTwo}}</li>
         </ul>
        <hr>
        <div class="col-md-6">

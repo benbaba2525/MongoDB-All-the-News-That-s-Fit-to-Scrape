@@ -22,7 +22,9 @@
         <a class="link" href="/saved">SAVED ARTICLES </a>
       </li>
       <li class="nav-item">
-           <a class="link" href="/">HOME</a>
+           <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+             <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        <a class="link" href="/" id="scrapeBtn">SCRAPE NEWS ARTICLES</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0 ml-5">
@@ -33,42 +35,44 @@
 </nav>
 </div>
 
+<!-- Newspaper picture -->
+<div class="headDiv">
+  <div class="container">
+  <h1 class="h1News">NEWS SCRAPER!</h1>
+</div>
+</div>
+
+<hr>
     <hr class="white-underline">
 
-    <!-- Articles List -->
-    
-<div class="container mt-5">
-  {{#each saved}}
-<div class="card mb-3" id="article">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="/img/newspaper.jpeg" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8" id="saved">
-      <div class="card-body">
-        <h2 class="card-title" id="headline">{{headline}}</h2>
-        <ul>
-                    <li class="summary">{{summaryOne}}</li>
-                    <li class="summary">{{summaryTwo}}</li>
-        </ul>
-       <hr>
-       <div class="col-md-6">
-          <a href={{link}} class="link">FULL STORY</a>
+    {{#each saved}}
+    <div class="row article">
+        <div class="col-md-6" id="saved">
+
+            <h2 class="headline">{{headline}}</h2>
+            <ul>
+                <li class="summary">{{summaryOne}}</li>
+                <li class="summary">{{summaryTwo}}</li>
+            </ul>
+            <hr>
+            <div class="row" id="bottom-row">
+                <div class="col-md-6">
+                    <a href={{link}} class="link">FULL STORY</a>
+                </div>
+                <div class="col-md-6">
+                    <form action="/unsave" method="PUT" id="delete-article">
+                        <input type="hidden" name="id" value={{_id}}>
+                        <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <form action="/unsave" method="POST" id="delete-article">
-          <input type="hidden" name="id" value={{_id}}>
-          <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
-        </form>
-
         <div class="col-md-6" id="newNoteDiv">
-            <form action="/newnote" method="POST" id="new-note">
+            <form action="/newnote" method="PUT" id="new-note">
                 <input type="hidden" name="id" value={{_id}}>
                 <input type="name" class="form-control" id="message" placeholder="Record a note...">
                 <button class="btn btn-lg" id="noteBtn" type="submit">SUBMIT</button>
             </form>
-
-            <!-- Note -->
             <div id="noteDiv">
                 <h2 class="savedHeader">Saved Notes</h2>
                 <hr>
@@ -79,13 +83,11 @@
                 </ul>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+    {{/each}}
+
 </div>
-{{/each}}
-</div>
-</body>
+
 <script>
     $(document).ready(function () {
         $("#new-note").on("submit", function (event) {
