@@ -1,82 +1,55 @@
-<head>
-  <title>News Scraper</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<body class="body">
-<!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">NEWS</a>
-  <div class="navDiv">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="link" href="/saved">SAVED ARTICLES </a>
-      </li>
-      <li class="nav-item">
-        <a class="link" href="/" id="scrapeBtn">SCRAPE NEWS ARTICLES</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0 ml-5">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-</div>
-
-
-<!-- Newspaper picture -->
-<div class="headDiv">
-  <div class="container">
-  <h1 class="h1News">NEWS SCRAPER!</h1>
-</div>
-</div>
-
-<hr>
-    
-<!-- Articles List -->
-<div class="container mt-5">
-  {{#each result}}
-  {{#unless saved}}
-<div class="card mb-3" class="article">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <!-- Image go here -->
-      <img class="media" src="{{img}}">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title" id="headline">{{headline}}</h2>
-       <ul>
-                    <li class="summary">{{summaryOne}}</li>
-                    <li class="summary">{{summaryTwo}}</li> 
-        </ul>
-       <hr>
-       <div class="col-md-6">
-          <a href={{link}} class="link" style="color: black;">FULL STORY</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">NYTIMES SCRAPER</h1>
         </div>
-        <form action="/update" method="POST" id="save-article">
-          <input type="hidden" name="id" value={{_id}}>
-          <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
-        </form>
-      </div>
     </div>
-  </div>
-</div>
-{{/unless}}
-{{/each}}
+    <div class="row" class="linkRow">
+        <div class="col-md-4">
+            <a href="/saved" class="upper-link">SAVED ARTICLES</a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.nytimes.com" class="upper-link">NYTIMES.COM</a>
+        </div>
+    </div>
 
+    <hr class="white-underline">
+    <div class="row">
+        {{#each result}}
+        {{#unless saved}}
+        <div class="col-md-6">
+
+            <div class="article">
+                <h2 class="headline">{{headline}}</h2>
+                <ul>
+                    <li class="summary">{{summaryOne}}</li>
+                    <li class="summary">{{summaryTwo}}</li>
+                </ul>
+                <hr>
+                <div class="row" id="bottom-row">
+                    <div class="col-md-6">
+                        <a href={{link}} class="link">FULL STORY</a>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="/update" method="PUT" id="save-article">
+                            <input type="hidden" name="id" value={{_id}}>
+                            <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{/unless}}
+        {{/each}}
+    </div>
 </div>
-</body>
+
+
+
 
 <script>
     $(document).ready(function () {
@@ -85,7 +58,6 @@
             event.preventDefault();
             $.get("/newscrape", function (data) {
                 location.reload();
-                
             });
         });
 

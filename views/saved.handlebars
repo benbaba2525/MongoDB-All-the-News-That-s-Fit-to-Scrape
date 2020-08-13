@@ -1,74 +1,50 @@
-<head>
-  <title>News Scraper</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<body class="body">
-<!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">NEWS</a>
-  <div class="navDiv">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="link" href="/saved">SAVED ARTICLES </a>
-      </li>
-      <li class="nav-item">
-           <a class="link" href="/">HOME</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0 ml-5">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-</div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">NYTIMES SCRAPER</h1>
+        </div>
+    </div>
+    <div class="row" class="linkRow">
+        <div class="col-md-4">
+            <a href="/" class="upper-link">HOME</a>
+        </div>
+        <div class="col-md-4">
+            <h2 id="savedTop">SAVED</h2>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.nytimes.com" class="upper-link">NYTIMES.COM</a>
+        </div>
+    </div>
     <hr class="white-underline">
 
-    <!-- Articles List -->
-    
-<div class="container mt-5">
-  {{#each saved}}
-<div class="card mb-3" id="article">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="/img/newspaper.jpeg" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8" id="saved">
-      <div class="card-body">
-        <h2 class="card-title" id="headline">{{headline}}</h2>
-        <ul>
-                    <li class="summary">{{summaryOne}}</li>
-                    <li class="summary">{{summaryTwo}}</li>
-        </ul>
-       <hr>
-       <div class="col-md-6">
-          <a href={{link}} class="link">FULL STORY</a>
+    {{#each saved}}
+    <div class="row article">
+        <div class="col-md-6" id="saved">
+
+            <h2 class="headline">{{headline}}</h2>
+            <ul>
+                <li class="summary">{{summaryOne}}</li>
+                <li class="summary">{{summaryTwo}}</li>
+            </ul>
+            <hr>
+            <div class="row" id="bottom-row">
+                <div class="col-md-6">
+                    <a href={{link}} class="link">FULL STORY</a>
+                </div>
+                <div class="col-md-6">
+                    <form action="/unsave" method="PUT" id="delete-article">
+                        <input type="hidden" name="id" value={{_id}}>
+                        <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <form action="/unsave" method="POST" id="delete-article">
-          <input type="hidden" name="id" value={{_id}}>
-          <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
-        </form>
-
         <div class="col-md-6" id="newNoteDiv">
-            <form action="/newnote" method="POST" id="new-note">
+            <form action="/newnote" method="PUT" id="new-note">
                 <input type="hidden" name="id" value={{_id}}>
                 <input type="name" class="form-control" id="message" placeholder="Record a note...">
                 <button class="btn btn-lg" id="noteBtn" type="submit">SUBMIT</button>
             </form>
-
-            <!-- Note -->
             <div id="noteDiv">
                 <h2 class="savedHeader">Saved Notes</h2>
                 <hr>
@@ -79,13 +55,11 @@
                 </ul>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+    {{/each}}
+
 </div>
-{{/each}}
-</div>
-</body>
+
 <script>
     $(document).ready(function () {
         $("#new-note").on("submit", function (event) {

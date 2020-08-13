@@ -1,33 +1,27 @@
 {
-  "name": "MongoDB-All-the-News-That-s-Fit-to-Scrape",
+  "name": "news-scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "All the news that's fit to scrape",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benbaba2525/MongoDB-All-the-News-That-s-Fit-to-Scrape.git"
+    "url": "git+https://github.com/nickila/news-scraper.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/benbaba2525/MongoDB-All-the-News-That-s-Fit-to-Scrape/issues"
+    "url": "https://github.com/nickila/news-scraper/issues"
   },
-  "homepage": "https://github.com/benbaba2525/MongoDB-All-the-News-That-s-Fit-to-Scrape#readme",
+  "homepage": "https://github.com/nickila/news-scraper#readme",
   "dependencies": {
-    "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.17.1",
-    "express-handlebars": "^5.1.0",
-    "init": "^0.1.2",
-    "mongoose": "^5.9.27",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.4.8"
   }
 }
