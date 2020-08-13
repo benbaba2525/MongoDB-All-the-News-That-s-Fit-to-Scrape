@@ -19,10 +19,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="link" href="/saved">SAVED ARTICLES <span class="sr-only">(current)</span></a>
+        <a class="link" href="/saved">SAVED ARTICLES </a>
       </li>
       <li class="nav-item">
-        <a class="link" href="/">SCRAPE NEWS ARTICLES</a>
+           <a class="link" href="/">HOME</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0 ml-5">
@@ -33,9 +33,10 @@
 </nav>
 </div>
 
+    <hr class="white-underline">
 
-
-<!-- Articles List -->
+    <!-- Articles List -->
+    
 <div class="container mt-5">
   {{#each saved}}
 <div class="card mb-3" id="article">
@@ -45,8 +46,11 @@
     </div>
     <div class="col-md-8" id="saved">
       <div class="card-body">
-        <h2 class="card-title" id="title">{{title}}</h2>
-        <p class="card-text" id="summary">{{summary}}</p>
+        <h2 class="card-title" id="headline">{{headline}}</h2>
+        <ul>
+                    <li class="summary">{{summaryOne}}</li>
+                    <li class="summary">{{summaryTwo}}</li>
+        </ul>
        <hr>
        <div class="col-md-6">
           <a href={{link}} class="link">FULL STORY</a>
@@ -82,3 +86,44 @@
 {{/each}}
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#new-note").on("submit", function (event) {
+            event.preventDefault();
+            console.log("new note");
+            var id = $(this).children().val();
+            console.log(id);
+            var newNote = $(this).children("#message").val();
+            console.log(id);
+            console.log(newNote);
+            var data = {
+                _id: id,
+                note: newNote
+            }
+            console.log(data);
+            $.ajax({
+                type: "PUT",
+                url: "/newnote/" + id,
+                data: data
+            })
+            location.reload();
+            $("#message").val("");
+        });
+        $("#delete-article").on("click", function (event) {
+            event.preventDefault();
+            console.log("delete it!");
+            var id = $(this).children().val();
+            console.log(id);
+            var data = {
+                _id: id
+            }
+            $.ajax("/unsave/" + id, {
+                type: "PUT",
+                data: data
+            })
+            location.reload();
+
+        });
+
+    });
+</script>
