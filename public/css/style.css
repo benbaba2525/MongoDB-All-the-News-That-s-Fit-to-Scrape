@@ -64,7 +64,7 @@
     font-size: 24px;
   }
   textarea {
-    height: 200px;
+    height: 300px;
     font-size: 18px;
   }
 
@@ -74,6 +74,18 @@
 
 
 
-  #saveBtn{
+  #saveBtn {
     background-color: rgba(5, 186, 5, 0.824);
+  }
+
+  #delete-article{
+    float: right;
+  }
+
+  #deleteBtn{
+    background-color: rgb(235, 63, 63);
+  }
+
+  #deleteBtn:hover{
+    background-color: rgb(254, 2, 2);
   }

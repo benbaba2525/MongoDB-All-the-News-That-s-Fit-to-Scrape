@@ -41,36 +41,32 @@
   {{#each saved}}
 <div class="card mb-3" id="article">
   <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="/img/newspaper.jpeg" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8" id="saved">
+     <!--<div class="col-md-4">-->
+      <!-- Image go here -->
+      <!--<img class="media" src="{{img}}">-->
+    <!--</div>-->
+    <div class="col-md-12" id="saved">
       <div class="card-body">
         <h2 class="card-title" id="headline">{{headline}}</h2>
         <ul>
                     <li class="summary">{{summaryOne}}</li>
                     <li class="summary">{{summaryTwo}}</li>
         </ul>
-       <hr>
-       <div class="col-md-6">
-          <a href={{link}} class="link">FULL STORY</a>
+
+       <div class="col-md-12" style="text-align: center;">
+          <a href={{link}} class="link" style="color: rgb(15, 72, 194);">FULL STORY</a>
         </div>
-
-        <form action="/unsave" method="POST" id="delete-article">
-          <input type="hidden" name="id" value={{_id}}>
-          <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
-        </form>
-
-        <div class="col-md-6" id="newNoteDiv">
-            <form action="/newnote" method="POST" id="new-note">
+    <hr>
+        <div class="col-md-12" id="newNoteDiv">
+            <form action="/newnote" method="POST" id="new-note" style="text-align: center; ">
                 <input type="hidden" name="id" value={{_id}}>
-                <input type="name" class="form-control" id="message" placeholder="Record a note...">
-                <button class="btn btn-lg" id="noteBtn" type="submit">SUBMIT</button>
+                <textarea type="name" class="form-control" id="message" placeholder="Record a note..."></textarea>
+                <button class="btn btn-lg" id="noteBtn" type="submit" style="background-color: rgba(5, 186, 5, 0.824); margin: 10px;">SUBMIT</button>
             </form>
-
+<hr>
             <!-- Note -->
             <div id="noteDiv">
-                <h2 class="savedHeader">Saved Notes</h2>
+                <h2 class="savedHeader" style="text-align:center;margin:10px;">Saved Notes</h2>
                 <hr>
                 <ul>
                 {{#each note}}
@@ -78,6 +74,10 @@
                 {{/each}}
                 </ul>
             </div>
+            <form action="/unsave" method="POST" id="delete-article">
+          <input type="hidden" name="id" value={{_id}}>
+          <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
+        </form>
         </div>
       </div>
     </div>
