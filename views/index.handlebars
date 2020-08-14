@@ -82,8 +82,9 @@
             event.preventDefault();
             $.get("/newscrape", function (data) {
                 location.reload();
-                
+                 
             });
+             alert("=== SCRAPED NEW ARTICLES !! ===");
         });
 
         $("#save-article").on("click", function (event) {
@@ -99,6 +100,8 @@
                 data: data
             })
             location.reload();
+            alert("=== SUCESSFULLY SAVED !! ===");
         });
+    
     });
 </script>
