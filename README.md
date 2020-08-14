@@ -1,6 +1,6 @@
 # MongoDB-All-the-News-That-s-Fit-to-Scrape
 
-##Overview
+## Overview
 This is an application that lets users scrape news articles : the title, summary and link from the The New York Times website. In this app, users are able to save their preferred articles,add notes or delete notes to one or multiple articles. This app uses Cheerio to scrape news from The New York Times and stores them in MongoDB using Mongoose. 
 
 `Go check it out :  ` https://mongodb-scraper-news.herokuapp.com/
