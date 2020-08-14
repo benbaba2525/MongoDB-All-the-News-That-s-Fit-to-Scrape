@@ -53,16 +53,17 @@
       <!-- Image go here -->
       <!--<img class="media" src="{{img}}">-->
     <!--</div>-->
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card-body">
         <h2 class="card-title" id="headline">{{headline}}</h2>
+        <hr>
        <ul>
                     <li class="summary">{{summaryOne}}</li>
                     <li class="summary">{{summaryTwo}}</li> 
         </ul>
        <hr>
        <div class="col-md-6">
-          <a href={{link}} class="link" style="color: black;">FULL STORY</a>
+          <a href={{link}} class="link" style="color: rgb(15, 72, 194);">FULL STORY</a>
         </div>
         <form action="/update" method="POST" id="save-article">
           <input type="hidden" name="id" value={{_id}}>

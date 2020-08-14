@@ -67,3 +67,13 @@
     height: 200px;
     font-size: 18px;
   }
+
+  #save-article{
+    text-align: center;
+  }
+
+
+
+  #saveBtn{
+    background-color: rgba(5, 186, 5, 0.824);
+  }
