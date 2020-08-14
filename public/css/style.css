@@ -12,6 +12,9 @@
     height: 380px;
 }
 
+#navbarSupportedContent{
+  margin: auto;
+}
 .link{
     color: white;
     font-size: 15px;
