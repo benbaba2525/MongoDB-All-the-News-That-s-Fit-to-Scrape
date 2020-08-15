@@ -61,8 +61,8 @@ $(document).ready(function () {
         var data = {
             _id: id
         }
-        $.ajax("/unsave/" + id, {
-            type: "PUT",
+        $.ajax("/delete/" + id, {
+            type: "DELETE",
             data: data
         })
         location.reload();

@@ -19,7 +19,7 @@ app.set("view engine", "handlebars");
 app.set('index', __dirname + '/views');
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoSrapeDB";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScrapeDB";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 var results = [];
@@ -75,32 +75,37 @@ app.put("/update/:id", function (req, res) {
         }
     });
 });
-app.put("/unsave/:id", function(req, res) {
+app.delete("/delete/:id", function(req, res) {
     console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     console.log(req.body)
-    db.Article.updateOne({ _id: req.params.id }, { $set: { saved: false }}, function(err, result) {
+    db.Article.findOneAndDelete({ _id: req.params.id }, { $set: { saved: false }}, function(err, result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
             res.status(200).end();
         }
     })
-})
+});
 
 app.put("/newnote/:id", function(req, res) {
-    console.log("**********************************")
-    console.log(req.body)
-    console.log(req.body._id);
-    console.log(req.body.note);
-    db.Article.updateOne({ _id: req.body._id }, { $push: { note: req.body.note }}, function(err, result) {
-        console.log(result)
-        if (result.changedRows == 0) {
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        } 
-    })
-})
+    // Create a new note and pass the req.body to the entry
+  db.Note.create(req.body)
+  .then(function(dbNote) {
+    // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
+    // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+    // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+    return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+  })
+  .then(function(dbArticle) {
+    // If we were able to successfully update an Article, send it back to the client
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json(err);
+  });
+});
+
 
 
 
