@@ -35,7 +35,6 @@ app.get("/", function (req, res) {
 app.get("/newscrape", function (req, res) {
     axios.get("https://www.nytimes.com/").then(function (response) {
         var $ = cheerio.load(response.data)
-       
         $("h2 span").each(function (i, element) {
             var headline = $(element).text();
             var link = "https://www.nytimes.com";
@@ -60,6 +59,9 @@ app.get("/newscrape", function (req, res) {
             .catch(function (err) {
                 console.log(err);
             })
+        app.get("/", function (req, res) {
+            res.render("index")
+        })
     })
 });
 
