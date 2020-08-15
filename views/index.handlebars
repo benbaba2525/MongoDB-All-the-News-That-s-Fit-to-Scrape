@@ -75,33 +75,3 @@
 </div>
 </body>
 
-<script>
-    $(document).ready(function () {
-
-        $("#scrapeBtn").on("click", function (event) {
-            event.preventDefault();
-            $.get("/newscrape", function (data) {
-                location.reload();
-                 
-            });
-             alert("=== SCRAPED NEW ARTICLES !! ===");
-        });
-
-        $("#save-article").on("click", function (event) {
-            event.preventDefault();
-            console.log("save it!");
-            var id = $(this).children().val();
-            console.log(id);
-            var data = {
-                _id: id
-            }
-            $.ajax("/update/" + id, {
-                type: "PUT",
-                data: data
-            })
-            location.reload();
-            alert("=== SUCESSFULLY SAVED !! ===");
-        });
-    
-    });
-</script>
