@@ -70,7 +70,7 @@
                 {{/each}}
                 </ul>
             </div>
-            <form action="/unsave" method="POST" id="delete-article">
+            <form action="/delete" method="DELETE" id="delete-article">
           <input type="hidden" name="id" value={{_id}}>
           <button class="btn btn-lg" id="deleteBtn" type="submit">DELETE</button>
         </form>
